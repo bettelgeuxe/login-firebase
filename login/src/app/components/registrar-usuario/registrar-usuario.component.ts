@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 //import { AngularFireModule } from '@angular/fire/compat';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AngularFireAuth} from '@angular/fire/compat/auth';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-registrar-usuario',
@@ -12,7 +13,9 @@ export class RegistrarUsuarioComponent implements OnInit {
 
   registrarUsuario : FormGroup;
 
-  constructor(private fb: FormBuilder, private afAuth : AngularFireAuth) {
+  constructor(private fb: FormBuilder,
+              private afAuth : AngularFireAuth,
+              private toastr : ToastrService) {
     this.registrarUsuario = this.fb.group({
       email: ['', Validators.required],
       password: ['', Validators.required],
@@ -35,7 +38,7 @@ export class RegistrarUsuarioComponent implements OnInit {
         console.log(user);
       }).catch((error) => {
       console.log(error);
-      alert(this.firebaseError(error.code))
+      this.toastr.error(this.firebaseError(error.code), 'Error');
     })
   }
 

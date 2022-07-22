@@ -35,8 +35,19 @@ export class RegistrarUsuarioComponent implements OnInit {
         console.log(user);
       }).catch((error) => {
       console.log(error);
-
+      alert(this.firebaseError(error.code))
     })
+  }
+
+  firebaseError(code : string){
+      switch(code){
+        case 'auth/email-already-in-use':
+          return 'El usuario ya existe';
+        case 'auth/weak-password':
+          return 'La contraseña debe tener mínimo 6 caracteres';
+        default:
+          return 'Error desconocido';
+      }
   }
 
 }

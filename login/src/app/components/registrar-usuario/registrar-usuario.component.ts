@@ -45,6 +45,8 @@ export class RegistrarUsuarioComponent implements OnInit {
           return 'El usuario ya existe';
         case 'auth/weak-password':
           return 'La contraseña debe tener mínimo 6 caracteres';
+        case 'auth/invalid-email':
+          return 'El correo ingresado no es válido';
         default:
           return 'Error desconocido';
       }
